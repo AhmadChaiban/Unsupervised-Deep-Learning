@@ -6,8 +6,9 @@ from builtins import range, input
 # sudo pip install -U future
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import matplotlib.pyplot as plt
+import tensorflow as tfv2
 
 from sklearn.utils import shuffle
 from util import error_rate, getKaggleMNIST
@@ -107,7 +108,7 @@ class DNN(object):
 
     def build_final_layer(self, D, M, K):
         # initialize logistic regression layer
-        self.W = tf.Variable(tf.random_normal(shape=(M, K)))
+        self.W = tf.Variable(tfv2.random.normal(shape=(M, K)))
         self.b = tf.Variable(np.zeros(K).astype(np.float32))
 
         self.X = tf.placeholder(tf.float32, shape=(None, D))
