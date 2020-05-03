@@ -6,9 +6,9 @@ from sklearn.decomposition import TruncatedSVD
 
 wordnet_lemmatizer = WordNetLemmatizer()
 
-titles = [line.rstrip() for line in open('all_book_titles.txt')]
+titles = [line.rstrip() for line in open('./nlp_class/all_book_titles.txt')]
 
-stopwords = set(w.rstrip() for w in open('stopwords.txt'))
+stopwords = set(w.rstrip() for w in open('./nlp_class/stopwords.txt'))
 
 ## an alternative source of stopwords is to directly import them from the
 ## nltk library
@@ -65,7 +65,7 @@ for title in titles:
 
 
 print('Number of errors parsing file: ', error_count, "number of lines in file: ", len(titles))
-if error_count == line(titles):
+if error_count == len(titles):
     print('There is no data to do anything with! Quitting...')
     exit()
 
@@ -85,12 +85,12 @@ D = len(word_index_map)
 X = np.zeros((D,N))
 i = 0
 for tokens in all_tokens:
-    x[:,i] = tokens_to_vector(tokens)
+    X[:,i] = tokens_to_vector(tokens)
     i+= 1
 
 def main():
     svd = TruncatedSVD()
-    Z = svd.fit_transform(x)
+    Z = svd.fit_transform(X)
     plt.scatter(Z[:,0], Z[:,1])
     for i in range(D):
         plt.annotate(s = index_word_map[i], xy=(Z[i,0], Z[i,1]))
