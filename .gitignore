@@ -3,3 +3,4 @@ MNIST Data
 __pycache__
 Notes Unsupervised Learning
 autoencoder/tmp
+movieData/
